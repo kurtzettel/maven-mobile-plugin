@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: app_with_dependency
+RIM-COD-Module-Dependencies: net_rim_cldc,library_project_1
+MIDlet-Jar-Size: 15085
+MIDlet-1: ,img/icon.png,
+RIM-COD-Creation-Time: 1306089233
+MIDlet-Jar-URL: app-with-dependency.jar
+RIM-COD-URL: app_with_dependency.cod
+RIM-COD-SHA1: 9c 8a 08 8a 66 f5 68 e0 8d a9 e7 26 17 c7 ea 3e 39 48 ab 38
+RIM-COD-Size: 8508
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+MIDlet-Name: app-with-dependency
+MIDlet-Vendor: BlackBerry Developer
+MicroEdition-Profile: MIDP-2.0
+RIM-MIDlet-Flags-1: 0

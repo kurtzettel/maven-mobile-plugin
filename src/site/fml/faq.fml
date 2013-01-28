@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="how-to-use-rims-default-folders">
+      <question>How do I use src and res directories for my code instead of src/main/java and src/main/resources?</question>
+      <answer>
+        <p>
+		You can change your source directory by changing the project/build/sourceDirectory to src.			
+	<pre>		
+&lt;project&gt;
+    ...
+    &lt;build&gt;
+    	&lt;sourceDirectory&gt;${project.basedir}/src&lt;/sourceDirectory&gt;
+    &lt;/build&gt;
+    ...
+&lt;/project&gt;
+		</pre>	
+        </p>
+        <p>You can change the resources directory by adding the resource directory to the pom:
+	<pre>		
+&lt;project&gt;
+    ...
+    &lt;build&gt;
+	    &lt;resources&gt;
+      		&lt;resource&gt;
+        		&lt;directory&gt;${project.basedir}/res&lt;/directory&gt;
+      		&lt;/resource&gt;
+    	&lt;/resources&gt;
+    &lt;/build&gt;
+    ...
+&lt;/project&gt;
+				
+		</pre>
+		</p>        
+      </answer>
+    </faq>
+<faq id="how-to-install-the-net-rim-jar">
+      <question>I get an error that the net-rim jar is missing.  How do I install these?</question>
+      <answer>
+        <p>
+		RIM's jar are licensed and have to be downloaded from RIM's site directly.  You can get these from the JDE or the Eclipse plugin.  These can then be involved using the Maven install plugin.
+		
+		<pre>mvn install:install-file -Dfile=C:\\tools\\eclipse\\eclipse-rim-3.0.201102031007-19\\plugins\\net.rim.ejde.componentpack6.0.0_6.0.0.30\\components\\lib\\net_rim_api.jar -DgroupId=net.rim -DartifactId=net-rim-api -Dversion=6.0.0.30 -Dpackaging=jar</pre>
+		
+		If you have trouble finding the version you can look at it in the path of the eclipse plugin components directory or in the JDE's Help -> About menu.  I strongly recommend using a detailed version name such as 6.0.0.30 rather than 6.0.0 since RIM has a tendency to update these components from time to time.
+		</p>        
+      </answer>
+    </faq>    
+<faq id="cannot-resolve-packaging-type">
+      <question>Maven gives me an error about resolving the packaging type of bbapp or bblib.  How do I fix this?</question>
+      <answer>
+        <p>
+		Maven cannot resolve the packaginge types and lifecycles from plugins unless they are setup to be included as extensions.  In your pom under build/plugins/plugin for the maven-mobile-plugin add the following tag:
+		<pre>&lt;extensions&gt;true&lt;/extensions&gt;</pre>
+		</p>        
+      </answer>
+    </faq>        
+  </part>
+</faqs>

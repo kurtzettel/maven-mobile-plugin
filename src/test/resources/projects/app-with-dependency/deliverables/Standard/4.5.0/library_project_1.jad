@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: library_project_1
+RIM-COD-Module-Dependencies: net_rim_cldc
+MIDlet-Jar-Size: 4222
+RIM-COD-Creation-Time: 1306089231
+MIDlet-Jar-URL: library-project-1.jar
+RIM-COD-URL: library_project_1.cod
+RIM-Library-Flags: 2
+RIM-COD-SHA1: 7a bd ef e9 68 69 35 0a 6f 8e f2 63 16 30 08 fd 01 36 34 37
+RIM-COD-Size: 1984
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.0.0
+MIDlet-Name: library-project-1
+MIDlet-Vendor: BlackBerry Developer
+MicroEdition-Profile: MIDP-2.0

@@ -1,0 +1,5 @@
+h2. Maven Plugin for BlackBerry Applications
+
+This plugin can build multiple BlackBerry applications and libraries.  It works on Windows, Mac, and Linux.
+
+To log into svn and checkout the source use the username and password: anonymous/anonymous.

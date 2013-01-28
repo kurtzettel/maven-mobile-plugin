@@ -1,0 +1,79 @@
+<component-set>
+	<components>
+		<component>
+			<role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+			<role-hint>bbapp</role-hint>
+			<implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+			<configuration>
+				<phases>
+					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles</generate-sources>
+<!-- 					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources> -->
+					<process-sources>com.goodformobile:maven-mobile-plugin:rim-cleanup,com.goodformobile:maven-mobile-plugin:preprocess</process-sources>
+					<process-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</process-resources>
+					<compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</compile>
+					<process-test-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</process-test-resources>
+					<!-- This should be added for Linux since RIM's executable doesn't include it.-->
+					<process-classes>com.goodformobile:maven-mobile-plugin:preverify</process-classes>
+					<test-compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile</test-compile>
+					<test>org.apache.maven.plugins:maven-surefire-plugin:2.7.2:test</test>
+					<prepare-package>com.goodformobile:maven-mobile-plugin:generate-rapc</prepare-package>
+					<package>com.goodformobile:maven-mobile-plugin:shade,com.goodformobile:maven-mobile-plugin:rapc,com.goodformobile:maven-mobile-plugin:sign,com.goodformobile:maven-mobile-plugin:setup-app-deliverables,org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
+					<!-- <package>org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar</package> -->
+					<install>org.apache.maven.plugins:maven-install-plugin:2.3.1:install</install>
+					<deploy>org.apache.maven.plugins:maven-deploy-plugin:2.5:deploy</deploy>
+				</phases>
+			</configuration>
+		</component>
+		<component>
+			<role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+			<role-hint>bblib</role-hint>
+			<implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+			<configuration>
+				<phases>
+					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources>
+					<process-sources>com.goodformobile:maven-mobile-plugin:rim-cleanup,com.goodformobile:maven-mobile-plugin:preprocess</process-sources>
+					<process-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</process-resources>
+					<compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</compile>
+					<process-test-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:testResources</process-test-resources>
+					<!-- This should be added for Linux since RIM's executable doesn't include it.-->
+					<process-classes>com.goodformobile:maven-mobile-plugin:preverify</process-classes>
+					<test-compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile</test-compile>
+					<test>org.apache.maven.plugins:maven-surefire-plugin:2.7.2:test</test>
+					<prepare-package>com.goodformobile:maven-mobile-plugin:generate-rapc</prepare-package>
+					<package>com.goodformobile:maven-mobile-plugin:rapc,com.goodformobile:maven-mobile-plugin:setup-lib-deliverables,org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
+					<install>org.apache.maven.plugins:maven-install-plugin:2.3.1:install</install>
+					<deploy>org.apache.maven.plugins:maven-deploy-plugin:2.5:deploy</deploy>
+				</phases>
+			</configuration>
+		</component>		
+		<component>
+			<role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+			<role-hint>bbapp</role-hint>
+			<implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
+			<configuration>
+				<!--the extension used by Maven in the repository -->
+				<extension>zip</extension>
+				<!--the type used when specifying dependencies etc. -->
+				<type>bbapp</type>
+				<!--the packaging used when declaring an implementation of the packaging -->
+				<packaging>zip</packaging>
+			</configuration>
+		</component>
+		<component>
+			<role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+			<role-hint>bblib</role-hint>
+			<implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
+			<configuration>
+				<!--the extension used by Maven in the repository -->
+				<extension>jar</extension>
+				<!--the type used when specifying dependencies etc. -->
+				<type>bblib</type>
+				<!--the packaging used when declaring an implementation of the packaging -->
+				<packaging>jar</packaging>
+		        <language>java</language>
+		        <addedToClasspath>true</addedToClasspath>				
+			</configuration>
+		</component>
+		
+	</components>
+</component-set>

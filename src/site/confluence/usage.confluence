@@ -1,0 +1,227 @@
+h2. Usage
+
+h3. Configuring your settings.xml
+
+In order to build for RIM's platform you need to specify the jde.directory and preverify.path in your settings.xml.  The best way to
+do this is to create a profile for your specific plaform.
+
+{code:xml}
+<settings>
+  ...
+	<profile>
+		<id>rim-4.5.0</id>
+		<properties>
+			<rim.platform>rim-4.5.0</rim.platform>
+			<rim.jar.version>4.5.0.28</rim.jar.version>
+			<jde.directory>C:\\tools\\rim\\jde\\4.5.0</jde.directory>
+			<preverify.path>C:\\tools\\rim\\jde\\4.5.0\\bin\\preverify.exe</preverify.path>
+			<signature.path>C:\\tools\\rim\\SignatureTool</signature.path>
+		</properties>
+	</profile>		
+	<profile>
+		<id>rim-6.0.0</id>
+		<properties>
+			<rim.platform>rim-6.0.0</rim.platform>
+			<rim.jar.version>6.0.0.30</rim.jar.version>
+			<jde.directory>C:\\tools\\eclipse\\eclipse-rim-1.3mr\\plugins\\net.rim.ejde.componentpack6.0.0_6.0.0.30\\components</jde.directory>
+			<preverify.path>C:\\tools\\eclipse\\eclipse-rim-1.3mr\\plugins\\net.rim.ejde.componentpack6.0.0_6.0.0.30\\components\\bin\\preverify.exe</preverify.path>
+			<signature.path>C:\\tools\\rim\\SignatureTool</signature.path>
+		</properties>
+	</profile>
+  ...
+</settings>
+{code}
+
+h3. Setting up signing:
+
+The easiest way is to setup a separate location of the signing tool and set it in your settings.xml (See above).  You can then set the password in your settings.xml:
+
+{code:xml}
+<settings>
+  ...  
+  <servers>
+    <server>
+      <id>rim-signing</id>
+      <password>myPassword</password>
+    </server>
+  </servers>	
+  ...
+</settings>
+{code}
+
+You can also encrypt your password in your settings.xml this using Maven's password tools and then save the hash:
+
+{code:xml}
+<settings>
+  ...  
+  <servers>
+    <server>
+      <id>rim-signing</id>
+      <password>{AAAAxeaSe4H6/AAAFiOrRaKouCK5Z3vmPsAAAAAAAA=}</password>
+    </server>
+  </servers>	
+  ...
+</settings>
+{code}
+
+h3. BlackBerry project Parent Pom
+
+This platform requires a fair amount of configuration.  I recommend a parent pom which sets up your project appropriately.  This one sets up 4 platforms.  It uses Preprocessor defines for each one (except 4.5).
+
+{code:xml}
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mycompany.mobile</groupId>
+	<artifactId>blackberry-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>BlackBerry Parent</name>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.goodformobile</groupId>
+				<artifactId>maven-mobile-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>1.1-SNAPSHOT</version>
+				<configuration>
+					<vendor>BlackBerry Developer</vendor>
+					<platformClassifier>${rim.platform}</platformClassifier>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.3</source>
+					<target>1.1</target>
+					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<bootclasspath>${settings.localRepository}/net/rim/net-rim-api/${rim.jar.version}/net-rim-api-${rim.jar.version}.jar</bootclasspath>
+					</compilerArguments>
+				</configuration>
+				<dependencies>
+					<!-- This isn't really a dependency but it is needed in the boot classpath above.  Having this will cause you to get the correct error message if you don't have the RIM jar version. -->
+					<dependency>
+						<groupId>net.rim</groupId>
+						<artifactId>net-rim-api</artifactId>
+						<version>${rim.jar.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>rim-6.0.0</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.goodformobile</groupId>
+						<artifactId>maven-mobile-plugin</artifactId>
+						<configuration>
+							<preprocessorDefines>
+								<value>BB46</value>
+								<value>BB47</value>
+								<value>BB50</value>
+								<value>BB60</value>
+							</preprocessorDefines>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>rim-5.0.0</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.goodformobile</groupId>
+						<artifactId>maven-mobile-plugin</artifactId>
+						<configuration>
+							<vendor>BlackBerry Developer</vendor>
+							<preprocessorDefines>
+								<value>BB46</value>
+								<value>BB47</value>
+								<value>BB50</value>
+							</preprocessorDefines>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>rim-4.7.0</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.goodformobile</groupId>
+						<artifactId>maven-mobile-plugin</artifactId>
+						<configuration>
+							<vendor>BlackBerry Developer</vendor>
+							<preprocessorDefines>
+								<value>BB46</value>
+								<value>BB47</value>
+							</preprocessorDefines>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>rim-4.6.0</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.goodformobile</groupId>
+						<artifactId>maven-mobile-plugin</artifactId>
+						<configuration>
+							<vendor>BlackBerry Developer</vendor>
+							<preprocessorDefines>
+								<value>BB46</value>
+							</preprocessorDefines>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>rim-4.5.0</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.goodformobile</groupId>
+						<artifactId>maven-mobile-plugin</artifactId>
+						<configuration>
+							<vendor>BlackBerry Developer</vendor>
+							<preprocessorDefines>
+								<!-- No defines needed for 4.5.0 -->
+							</preprocessorDefines>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
+
+{code}
+
+h2. Executing build
+
+One problem I haven't overcame is that dependency resolution is a little finicky when a dependency uses a property defined in a profile.  Because of that I build with the command:
+
+{noformat}
+mvn clean install -P rim-4.5.0 -Drim.platform=rim-4.5.0
+{noformat}
+
+I don't like that I have to specify things twice but it beats using the IDE to build.

@@ -1,0 +1,8 @@
+//#preprocess
+EXPECTED1
+//#ifdef VER_4.6.1 | VARIABLE1 | VER_4.5.0 | VER_4.2.1 | VER_4.2.0
+EXPECTED2
+//#else
+FORBIDDEN
+//#endif
+EXPECTED3

@@ -1,0 +1,40 @@
+ ------
+ RIM Library Dependency Quirks
+ ------
+ Kurt Zettel
+ ------
+ 2011-05-11
+ ------
+
+	The final packaged application of a BlackBerry project is a cod (pronounced like the fish) file.  If you have library projects
+	the RIM jde and Eclipse plugin will include them as dependencies in your jad file and leave the cod files in the packaged directory:
+
++-----+
+Application
+|-- deliverables
+|   |-- my_app.cod
+|   `-- my_app.jad
+|   `-- my_library.jad
+|   `-- my_library.cod
++-----+
+
+	Your jad would then include a reference to that library cod file:
+
++-----+
+RIM-COD-Module-Name: my_app
+RIM-COD-Module-Dependencies: net_rim_cldc,my_library
++-----+
+
+	This has the advantage that the library can be shared but the disadvantage of RIM's classloader.  Basically it can't really handle 
+	multiple versions of the same library which makes sharing libraries difficult and nearly impossible through an upgrade.
+	
+	The easiest way around this is to include the library in your application and bundle this code as a single cod file.  This will have
+	all your classes in one cod file (similar to the {{{http://maven.apache.org/plugins/maven-shade-plugin/index.html}Maven Shade Plugin}} or {{{http://maven.apache.org/maven-1.x/plugins/uberjar/}Uber Jar}}).
+	
+	To specify whether the app should be a library dependency or included you should specify the correct {{{http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope}dependency scope}}.
+
+	* A dependency scope of <<<provided>>> results in a the first type: your library will listed as a cod module dependency in your jad.
+
+	* A dependency scope of <<<compile>>> results in a the second type: your library will be bundled with your application.
+
+

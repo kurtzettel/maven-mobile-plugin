@@ -1,0 +1,46 @@
+* Define A BlackBerry Application in the plugin descriptor.  See http://maven.apache.org/guides/mini/guide-configuring-plugins.html for details on mapping complex objects.
+** Consider creating a goal which distills the app xml into pom goals (Based on defaults and conventions)
+** Guess the defaults and derive the minimal pom possible based on whatever settings.
+* Generate a BlackBerry Descriptor
+** Allow the minimal pom to generate a complete descriptor.
+* Handle multiple entry points.
+* Create a goal that executes multiple profiles (May be done with a different plugin, Probably the invoker-plugin)
+
+Done:
+* Sign
+* Execute RAPC.
+** Currently executes for apps or libraries.  Doesn't understand apps with dependencies.  This will require jar to create a jar with classes and a cod.
+* Preverify (May be done with a different plugin)
+* Bundle
+* Generate a RAPC property file
+** Currently handles libraries and applications.  
+
+Important RAPC commands from the plugin output:
+{code}
+Packaging project library-project-1
+C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\bin\rapc.exe -convertpng -nomain -quiet library=deliverables\Standard\4.5.0\library_project_1 deliverables\Standard\4.5.0\library_project_1.rapc -sourceroot=C:\workspaces\rim\library-project-1\src;C:\workspaces\rim\library-project-1\res -import=C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\lib\net_rim_api.jar C:\workspaces\rim\library-project-1\bin
+Packaging project library-project-1 succeeded (took 1.413 seconds) 
+
+Packaging project app-with-dependency
+C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\bin\rapc.exe -convertpng -quiet codename=deliverables\Standard\4.5.0\app_with_dependency deliverables\Standard\4.5.0\app_with_dependency.rapc -sourceroot=C:\workspaces\rim\app-with-dependency\src;C:\workspaces\rim\app-with-dependency\res -import=C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\lib\net_rim_api.jar;C:\workspaces\rim\library-project-1\deliverables\Standard\4.5.0\library_project_1.jar C:\workspaces\rim\app-with-dependency\bin
+Packaging project app-with-dependency succeeded (took 1.079 seconds) 
+
+
+Packaging project app-with-dependency
+C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\bin\rapc.exe 
+-convertpng 
+-quiet 
+codename=deliverables\Standard\4.5.0\app_with_dependency deliverables\Standard\4.5.0\app_with_dependency.rapc 
+-sourceroot=C:\workspaces\rim\app-with-dependency\src;C:\workspaces\rim\app-with-dependency\res 
+-import=C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack4.5.0_4.5.0.28\components\lib\net_rim_api.jar;
+C:\workspaces\rim\library-project-1\deliverables\Standard\4.5.0\library_project_1.jar 
+C:\workspaces\rim\app-with-dependency\bin
+{code}
+
+
+For localization the following Maven Command accomplishes something close to extract the Java classes and generated resource bundle (which contains a lamda in the file name and causes lots of cross platform problems)
+
+{code}
+java -Djava.io.tmpdir=D:\Users\Kurt\Desktop\Scratch\sign\tmp -jar C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack6.0.0_6.0.0.30\components\bin\rapc.jar -nomain -nojar -nodebug -verbose -javacompiler=xxxxxx -sourceroot=. -import=C:\tools\eclipse\eclipse-rim-3.0.201102031007-19\plugins\net.rim.ejde.componentpack6.0.0_6.0.0.30\components\lib\net_rim_api.jar hello_mundo.rapc @build.files
+
+{code}

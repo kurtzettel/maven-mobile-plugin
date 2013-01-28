@@ -1,0 +1,8 @@
+//#preprocess
+EXPECTED1
+//#ifndef VARIABLE1
+EXPECTED2
+//#else
+FORBIDDEN
+//#endif
+EXPECTED3
