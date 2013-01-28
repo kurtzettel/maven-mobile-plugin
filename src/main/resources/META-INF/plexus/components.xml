@@ -7,7 +7,8 @@
 			<configuration>
 				<phases>
 					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles</generate-sources>
-<!-- 					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources> -->
+<!-- 				<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,
+						com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources> -->
 					<process-sources>com.goodformobile:maven-mobile-plugin:rim-cleanup,com.goodformobile:maven-mobile-plugin:preprocess</process-sources>
 					<process-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</process-resources>
 					<compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</compile>
@@ -17,7 +18,9 @@
 					<test-compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile</test-compile>
 					<test>org.apache.maven.plugins:maven-surefire-plugin:2.7.2:test</test>
 					<prepare-package>com.goodformobile:maven-mobile-plugin:generate-rapc</prepare-package>
-					<package>com.goodformobile:maven-mobile-plugin:shade,com.goodformobile:maven-mobile-plugin:rapc,com.goodformobile:maven-mobile-plugin:sign,com.goodformobile:maven-mobile-plugin:setup-app-deliverables,org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
+					<package>com.goodformobile:maven-mobile-plugin:shade,com.goodformobile:maven-mobile-plugin:rapc,
+						com.goodformobile:maven-mobile-plugin:sign,com.goodformobile:maven-mobile-plugin:setup-app-deliverables,
+						org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
 					<!-- <package>org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar</package> -->
 					<install>org.apache.maven.plugins:maven-install-plugin:2.3.1:install</install>
 					<deploy>org.apache.maven.plugins:maven-deploy-plugin:2.5:deploy</deploy>
@@ -30,7 +33,9 @@
 			<implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
 			<configuration>
 				<phases>
-					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources>
+					<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles</generate-sources>
+<!-- 				<generate-sources>com.goodformobile:maven-mobile-plugin:createRIMLocalizationFiles,
+						com.goodformobile:maven-mobile-plugin:generateRIMLocalizationInterfaces</generate-sources> -->
 					<process-sources>com.goodformobile:maven-mobile-plugin:rim-cleanup,com.goodformobile:maven-mobile-plugin:preprocess</process-sources>
 					<process-resources>org.apache.maven.plugins:maven-resources-plugin:2.4.3:resources</process-resources>
 					<compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile</compile>
@@ -40,12 +45,13 @@
 					<test-compile>org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile</test-compile>
 					<test>org.apache.maven.plugins:maven-surefire-plugin:2.7.2:test</test>
 					<prepare-package>com.goodformobile:maven-mobile-plugin:generate-rapc</prepare-package>
-					<package>com.goodformobile:maven-mobile-plugin:rapc,com.goodformobile:maven-mobile-plugin:setup-lib-deliverables,org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
+					<package>com.goodformobile:maven-mobile-plugin:rapc,com.goodformobile:maven-mobile-plugin:setup-lib-deliverables,
+						org.apache.maven.plugins:maven-jar-plugin:2.3.1:jar,com.goodformobile:maven-mobile-plugin:setup-classified-jar</package>
 					<install>org.apache.maven.plugins:maven-install-plugin:2.3.1:install</install>
 					<deploy>org.apache.maven.plugins:maven-deploy-plugin:2.5:deploy</deploy>
 				</phases>
 			</configuration>
-		</component>		
+		</component>
 		<component>
 			<role>org.apache.maven.artifact.handler.ArtifactHandler</role>
 			<role-hint>bbapp</role-hint>
@@ -70,10 +76,10 @@
 				<type>bblib</type>
 				<!--the packaging used when declaring an implementation of the packaging -->
 				<packaging>jar</packaging>
-		        <language>java</language>
-		        <addedToClasspath>true</addedToClasspath>				
+				<language>java</language>
+				<addedToClasspath>true</addedToClasspath>
 			</configuration>
 		</component>
-		
+
 	</components>
 </component-set>

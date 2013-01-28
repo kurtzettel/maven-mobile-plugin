@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goodformobile</groupId>
 	<artifactId>maven-mobile-plugin</artifactId>
-	<version>1.12-SNAPSHOT</version>
+	<version>1.12.mreed-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>Mobile Java Maven Plugin</name>
 	<url>http://goodformobile.com/</url>
@@ -49,18 +49,26 @@
 	</ciManagement>
 	
 	<distributionManagement>
+<!-- 		<repository> -->
+<!-- 			<uniqueVersion>false</uniqueVersion> -->
+<!-- 			<id>gfm-nexus</id> -->
+<!-- 			<name>Good For Mobile Repository</name> -->
+<!-- 			<url>http://dev.goodformobile.com/nexus/content/repositories/releases/</url> -->
+<!-- 		</repository> -->
+<!-- 		<snapshotRepository> -->
+<!-- 			<uniqueVersion>true</uniqueVersion> -->
+<!-- 			<id>gfm-nexus</id> -->
+<!-- 			<name>Good For Mobile Snapshots</name> -->
+<!-- 			<url>http://dev.goodformobile.com/nexus/content/repositories/snapshots/</url> -->
+<!-- 		</snapshotRepository> -->
 		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>gfm-nexus</id>
-			<name>Good For Mobile Repository</name>
-			<url>http://dev.goodformobile.com/nexus/content/repositories/releases/</url>
+			<id>hardisonbrewing-snapshots</id>
+			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/snapshots</url>
 		</repository>
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>gfm-nexus</id>
-			<name>Good For Mobile Snapshots</name>
-			<url>http://dev.goodformobile.com/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
+<!-- 		<repository> -->
+<!-- 			<id>hardisonbrewing-releases</id> -->
+<!-- 			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/releases</url> -->
+<!-- 		</repository> -->
 		<site>
 			<id>gfm-nexus</id>
 			<url>file:///var/www/maven-mobile-plugin</url>

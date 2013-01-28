@@ -43,11 +43,24 @@ public class GenerateRAPCMojo extends AbstractRIMBuildMojo {
 	 * @parameter 
 	 */
 	protected String midletName;	
+
+	/**
+	 * Determines if the application should attempt to run RAPC.
+	 * 
+	 * @parameter default-value="${skip.rapc}"
+	 */
+	private boolean skipRapc;
 	
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
 		getLog().info("GenerateRAPCMojo.execute()");
+
+		if (skipRapc) {
+			getLog().info("Skipping RAPC.");
+			return;
+		}
+		
 		Writer writer = null;
 		try {
 			String targetDirectoryPath = project.getBuild().getDirectory() + File.separator + "rapc";

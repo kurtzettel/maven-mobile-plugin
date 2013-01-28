@@ -68,9 +68,21 @@ public class PreverifyMojo extends AbstractRIMBuildMojo {
 	 */
 	private List<String> classpathElements;
 
+	/**
+	 * Determines if the application should attempt to run preverify.
+	 * 
+	 * @parameter default-value="${skip.preverify}"
+	 */
+	private boolean skipPreverify;
+
 	public void execute() throws MojoExecutionException {
 
 		getLog().info("PreverifyMojo.execute()");
+
+		if (skipPreverify) {
+			getLog().info("Skipping preverify.");
+			return;
+		}
 
 		boolean useProguard = false;
 
