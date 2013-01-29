@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goodformobile</groupId>
 	<artifactId>maven-mobile-plugin</artifactId>
-	<version>1.12.mreed-SNAPSHOT</version>
+	<version>1.12.mreed.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>Mobile Java Maven Plugin</name>
 	<url>http://goodformobile.com/</url>
@@ -23,8 +23,10 @@
 		<url>http://dev.goodformobile.com/confluence/dashboard.action</url>
 	</organization>
 	<scm>
-		<url>svn://goodformobile.com/maven-plugin</url>
-		<developerConnection>scm:svn:svn://goodformobile.com/maven-plugin/trunk/maven-mobile-plugin</developerConnection>
+		<url>scm:git:git@github.com:MartinMReed/maven-mobile-plugin.git</url>
+		<connection>scm:git:git@github.com:MartinMReed/maven-mobile-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:MartinMReed/maven-mobile-plugin.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 	<developers>
 		<developer>
@@ -47,33 +49,22 @@
 		<system>Bamboo</system>
 		<url>http://dev.goodformobile.com/bamboo/browse/MMP</url>
 	</ciManagement>
-	
 	<distributionManagement>
-<!-- 		<repository> -->
-<!-- 			<uniqueVersion>false</uniqueVersion> -->
-<!-- 			<id>gfm-nexus</id> -->
-<!-- 			<name>Good For Mobile Repository</name> -->
-<!-- 			<url>http://dev.goodformobile.com/nexus/content/repositories/releases/</url> -->
-<!-- 		</repository> -->
-<!-- 		<snapshotRepository> -->
-<!-- 			<uniqueVersion>true</uniqueVersion> -->
-<!-- 			<id>gfm-nexus</id> -->
-<!-- 			<name>Good For Mobile Snapshots</name> -->
-<!-- 			<url>http://dev.goodformobile.com/nexus/content/repositories/snapshots/</url> -->
-<!-- 		</snapshotRepository> -->
 		<repository>
+			<id>hardisonbrewing-releases</id>
+			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/releases</url>
+			<uniqueVersion>true</uniqueVersion>
+		</repository>
+		<snapshotRepository>
 			<id>hardisonbrewing-snapshots</id>
 			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/snapshots</url>
-		</repository>
-<!-- 		<repository> -->
-<!-- 			<id>hardisonbrewing-releases</id> -->
-<!-- 			<url>http://repo.hardisonbrewing.org/nexus/content/repositories/releases</url> -->
-<!-- 		</repository> -->
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
 		<site>
 			<id>gfm-nexus</id>
 			<url>file:///var/www/maven-mobile-plugin</url>
 		</site>
-	</distributionManagement>	
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -294,9 +285,19 @@
 						<totalLineRate>85</totalLineRate>
 						<packageLineRate>85</packageLineRate>
 						<packageBranchRate>85</packageBranchRate>
-						<!-- Saved as an example <regexes> <regex> <pattern>com.example.reallyimportant.*</pattern> 
-							<branchRate>90</branchRate> <lineRate>80</lineRate> </regex> <regex> <pattern>com.example.boringcode.*</pattern> 
-							<branchRate>40</branchRate> <lineRate>30</lineRate> </regex> </regexes> -->
+						<!-- Saved as an example -->
+<!-- 						<regexes> -->
+<!-- 							<regex> -->
+<!-- 								<pattern>com.example.reallyimportant.*</pattern> -->
+<!-- 								<branchRate>90</branchRate> -->
+<!-- 								<lineRate>80</lineRate> -->
+<!-- 							</regex> -->
+<!-- 							<regex> -->
+<!-- 								<pattern>com.example.boringcode.*</pattern> -->
+<!-- 								<branchRate>40</branchRate> -->
+<!-- 								<lineRate>30</lineRate> -->
+<!-- 							</regex> -->
+<!-- 						</regexes> -->
 					</check>
 					<instrumentation>
 						<excludes>
