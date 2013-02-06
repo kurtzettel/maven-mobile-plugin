@@ -71,7 +71,7 @@ public class PreverifyMojo extends AbstractRIMBuildMojo {
 	/**
 	 * Determines if the application should attempt to run preverify.
 	 * 
-	 * @parameter default-value="${skip.preverify}"
+	 * @parameter default-value="${preverify.skip}"
 	 */
 	private boolean skipPreverify;
 

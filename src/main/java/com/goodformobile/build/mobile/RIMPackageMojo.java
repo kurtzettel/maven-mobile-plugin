@@ -49,7 +49,7 @@ public final class RIMPackageMojo extends AbstractRIMBuildMojo {
 	/**
 	 * Determines if the application should attempt to run RAPC.
 	 * 
-	 * @parameter default-value="${skip.rapc}"
+	 * @parameter default-value="${rapc.skip}"
 	 */
 	private boolean skipRapc;
 
