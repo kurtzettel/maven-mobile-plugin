@@ -116,6 +116,7 @@ public class PreprocessClassesMojo extends AbstractRIMBuildMojo {
 			}
 		}
 
+		project.getBuild().setSourceDirectory(targetPreprocessFolder);
 		project.getCompileSourceRoots().clear();
 		project.getCompileSourceRoots().add(targetPreprocessFolder);
 	}

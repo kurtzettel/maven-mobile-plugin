@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goodformobile</groupId>
 	<artifactId>maven-mobile-plugin</artifactId>
-	<version>1.13.mreed.2-SNAPSHOT</version>
+	<version>1.12.mreed.3-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>Mobile Java Maven Plugin</name>
 	<url>http://goodformobile.com/</url>
