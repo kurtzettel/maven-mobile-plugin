@@ -46,9 +46,21 @@ public final class RIMPackageMojo extends AbstractRIMBuildMojo {
 	 */
 	private List<String> classpathElements;
 
+	/**
+	 * Determines if the application should attempt to run RAPC.
+	 * 
+	 * @parameter default-value="${rapc.skip}"
+	 */
+	private boolean skipRapc;
+
 	public void execute() throws MojoExecutionException {
 
 		getLog().info("RIMPackageMojo.execute()");
+
+		if (skipRapc) {
+			getLog().info("Skipping RAPC.");
+			return;
+		}
 
 		// File tempDirectory = new File(System.getProperty("java.io.tmpdir"));
 
